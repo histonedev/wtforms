@@ -146,15 +146,23 @@ class Input(object):
     """
     html_params = staticmethod(html_params)
 
-    def __init__(self, input_type=None):
+    def __init__(self, input_type=None, attributes={}):
         if input_type is not None:
             self.input_type = input_type
+
+        self.attributes = attributes
 
     def __call__(self, field, **kwargs):
         kwargs.setdefault('id', field.id)
         kwargs.setdefault('type', self.input_type)
         if 'value' not in kwargs:
             kwargs['value'] = field._value()
+
+        if kwargs.get("class") and self.attributes.get("class"):
+            kwargs['class'] += ' ' + self.attributes['class']
+            del self.attributes['class']
+
+        kwargs.update(self.attributes)
         return HTMLString('<input %s>' % self.html_params(name=field.name, **kwargs))
 
 

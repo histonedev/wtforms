@@ -16,3 +16,7 @@ dist/
 docs/_build
 docs/html
 env/
+
+.idea/
+test.py
+nohup.out
