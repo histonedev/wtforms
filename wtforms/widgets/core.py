@@ -158,7 +158,7 @@ class Input(object):
         if 'value' not in kwargs:
             kwargs['value'] = field._value()
 
-        if self.attributes:
+        if hasattr(self, 'attributes'):
             _class = kwargs.get("class", "")
             if self.attributes.get("class"):
                 _class += ' ' + self.attributes['class']
