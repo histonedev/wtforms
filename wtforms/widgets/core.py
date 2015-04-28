@@ -158,12 +158,13 @@ class Input(object):
         if 'value' not in kwargs:
             kwargs['value'] = field._value()
 
-        _class = kwargs.get("class", "")
-        if self.attributes.get("class"):
-            _class += ' ' + self.attributes['class']
+        if self.attributes:
+            _class = kwargs.get("class", "")
+            if self.attributes.get("class"):
+                _class += ' ' + self.attributes['class']
 
-        kwargs.update(self.attributes)
-        kwargs["class"] = _class
+            kwargs.update(self.attributes)
+            kwargs["class"] = _class
 
         return HTMLString('<input %s>' % self.html_params(name=field.name, **kwargs))
 
